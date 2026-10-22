@@ -33,15 +33,3 @@ npm run dev
 ```
 
 Abra o endereço que aparecer (geralmente http://localhost:5173).
-
-## Colocar no ar (Vercel)
-
-1. Entre em [vercel.com](https://vercel.com) e faça login com o GitHub.
-2. Clique em **Add New → Project**.
-3. Escolha este repositório e clique em **Import**.
-4. A Vercel reconhece que é Vite sozinha. Clique em **Deploy**.
-5. Pronto: em ~1 minuto aparece o link do site (`algo.vercel.app`).
-
-Depois disso, toda mudança enviada para o GitHub atualiza o site sozinha.
-
-**Domínio próprio** (ex.: `luizstahl.com`): na Vercel, abra o projeto → **Settings → Domains**.
