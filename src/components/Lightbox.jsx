@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useLang } from '../i18n'
 
 function RoundButton({ className, label, onClick, children, autoFocus }) {
   return (
@@ -17,6 +18,7 @@ function RoundButton({ className, label, onClick, children, autoFocus }) {
 // mostra a imagem grande; setas do teclado trocam, Esc fecha
 export default function Lightbox({ items, index, onClose, onChange }) {
   const isOpen = index !== null
+  const { t } = useLang()
 
   useEffect(() => {
     if (!isOpen) return
@@ -65,9 +67,9 @@ export default function Lightbox({ items, index, onClose, onChange }) {
             />
           </AnimatePresence>
 
-          <RoundButton autoFocus className="top-5 right-5" label="Fechar" onClick={onClose}>×</RoundButton>
-          <RoundButton className="top-1/2 left-5 -translate-y-1/2" label="Anterior" onClick={go(-1)}>‹</RoundButton>
-          <RoundButton className="top-1/2 right-5 -translate-y-1/2" label="Próxima" onClick={go(1)}>›</RoundButton>
+          <RoundButton autoFocus className="top-5 right-5" label={t.ui.close} onClick={onClose}>×</RoundButton>
+          <RoundButton className="top-1/2 left-5 -translate-y-1/2" label={t.ui.prev} onClick={go(-1)}>‹</RoundButton>
+          <RoundButton className="top-1/2 right-5 -translate-y-1/2" label={t.ui.next} onClick={go(1)}>›</RoundButton>
         </motion.div>
       )}
     </AnimatePresence>

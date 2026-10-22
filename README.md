@@ -8,12 +8,16 @@ Feito com **React + Vite + Tailwind CSS + Framer Motion**.
 
 Todo o conteúdo fica em um arquivo só: [`src/data.js`](src/data.js).
 
-- **Texto:** edite as frases direto no `data.js`.
-- **Imagem nova:** coloque o arquivo em `public/imagens/` e adicione uma linha no `items` da seção, por exemplo:
+O site tem dois idiomas: **Português (padrão)** e **Inglês**, com o botão PT | EN no topo. A escolha do visitante fica salva no navegador.
+
+- **Texto:** edite as frases no bloco `pt` (Português) **e** no bloco `en` (Inglês) do `data.js`.
+- **Imagem nova:** coloque o arquivo em `public/imagens/` e adicione uma linha na seção certa do `media`, por exemplo:
 
   ```js
-  { src: '/imagens/livery-4.jpg', label: 'Livery · 04', span: 'md:col-span-6', aspect: 'aspect-video' },
+  { src: '/imagens/livery-4.jpg', span: 'md:col-span-6', aspect: 'aspect-video' },
   ```
+
+  Depois adicione o nome da imagem no `labels` da mesma seção, nos dois idiomas (ex.: `'Livery · 04'`).
 
   `span` é quantas colunas (de 12) a imagem ocupa no computador. No celular, cada imagem ocupa a largura toda.
 

@@ -1,14 +1,20 @@
-import { about } from '../data'
+import { Fragment } from 'react'
+import { useLang } from '../i18n'
 import { Chip, Heading, Reveal, Tag } from './ui'
 
 export default function About() {
+  const { t } = useLang()
+  const { about } = t
+
   return (
     <section className="py-20 md:py-30">
       <div className="wrap grid gap-6 md:grid-cols-[1fr_1.4fr] md:gap-16">
         <Reveal>
-          <Tag>Sobre mim</Tag>
+          <Tag>{t.ui.aboutTag}</Tag>
           <Heading className="text-[clamp(48px,7vw,96px)]">
-            Arte digital<br />com<br />identidade
+            {t.ui.aboutTitle.map((line, i) => (
+              <Fragment key={i}>{i > 0 && <br />}{line}</Fragment>
+            ))}
           </Heading>
         </Reveal>
 

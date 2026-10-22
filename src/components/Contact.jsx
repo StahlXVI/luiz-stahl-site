@@ -1,14 +1,20 @@
+import { Fragment } from 'react'
 import { links } from '../data'
+import { useLang } from '../i18n'
 import { Button, Heading, Reveal, Tag } from './ui'
 
 export default function Contact() {
+  const { t } = useLang()
+
   return (
     <>
       <section className="border-t border-line bg-[radial-gradient(60%_60%_at_50%_100%,rgba(255,45,85,.18),transparent_70%)] py-20 text-center md:py-30">
         <Reveal className="wrap">
-          <Tag>Contato</Tag>
+          <Tag>{t.ui.contactTag}</Tag>
           <Heading className="mt-4 mb-9 text-[clamp(56px,10vw,150px)] leading-[.9]">
-            Bora criar<br />algo junto?
+            {t.ui.contactTitle.map((line, i) => (
+              <Fragment key={i}>{i > 0 && <br />}{line}</Fragment>
+            ))}
           </Heading>
           <div className="flex flex-wrap justify-center gap-3">
             <Button href={links.instagram}>Instagram ↗</Button>

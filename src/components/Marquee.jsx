@@ -1,10 +1,11 @@
 import { Fragment } from 'react'
-import { roles } from '../data'
-
-// repete as palavras 4x para a faixa nunca ficar com buraco vazio
-const row = Array.from({ length: 4 }).flatMap(() => roles)
+import { useLang } from '../i18n'
 
 export default function Marquee() {
+  const { t } = useLang()
+  // repete as palavras 4x para a faixa nunca ficar com buraco vazio
+  const row = Array.from({ length: 4 }).flatMap(() => t.roles)
+
   return (
     <div aria-hidden className="overflow-hidden border-y border-line bg-bg-2">
       <div className="flex w-max animate-marquee motion-reduce:animate-none">
