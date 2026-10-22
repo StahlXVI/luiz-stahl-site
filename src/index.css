@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0a0b;
+  --color-bg-2: #121214;
+  --color-fg: #f3f3f3;
+  --color-muted: #a1a1a8; /* contraste 7.7:1 no fundo (nível AAA) */
+  --color-soft: #c9c9ce;
+  --color-line: rgb(255 255 255 / 0.1);
+  --color-accent: #ff2d55;
+
+  --font-display: "Anton", Impact, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --animate-marquee: marquee 28s linear infinite;
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-bg text-fg font-sans antialiased overflow-x-hidden; }
+
+  /* contorno visível em quem navega pelo teclado (Tab) */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* quem pede menos movimento no sistema não vê rolagem animada */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  /* textura de granulado por cima de tudo */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* largura padrão do conteúdo, com 16px de folga nas laterais */
+@utility wrap {
+  width: min(1200px, 100% - 32px);
+  margin-inline: auto;
+}
+
+/* texto só com contorno (ex.: "DESIGN" no topo) */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-fg);
+}
+
+@utility text-outline-soft {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(255 255 255 / 0.25);
+}
