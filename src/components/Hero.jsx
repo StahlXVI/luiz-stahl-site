@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { links, roles } from '../data'
+import { links } from '../data'
+import { useLang } from '../i18n'
 import { Button, Chip, ease } from './ui'
 
 const fadeUp = {
@@ -8,6 +9,8 @@ const fadeUp = {
 }
 
 export default function Hero() {
+  const { t } = useLang()
+
   return (
     <section
       id="inicio"
@@ -32,7 +35,7 @@ export default function Hero() {
           variants={fadeUp}
           className="mb-3.5 inline-block rounded-md bg-bg/80 px-2.5 py-1.5 font-mono text-sm tracking-[.08em] uppercase"
         >
-          Portfólio · Freelancer desde 2022
+          {t.ui.heroTag}
         </motion.p>
 
         <motion.h1
@@ -46,10 +49,10 @@ export default function Hero() {
 
         <motion.div variants={fadeUp} className="mt-7 flex flex-wrap items-end justify-between gap-8">
           <div className="flex flex-wrap gap-2">
-            {roles.map((r) => <Chip key={r}>{r}</Chip>)}
+            {t.roles.map((r) => <Chip key={r}>{r}</Chip>)}
           </div>
           <div className="flex flex-wrap gap-3">
-            <Button href="#livery">Ver trabalhos ↓</Button>
+            <Button href="#livery">{t.ui.seeWork}</Button>
             <Button href={links.behance} variant="ghost">Behance ↗</Button>
           </div>
         </motion.div>

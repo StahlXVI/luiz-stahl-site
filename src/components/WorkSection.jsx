@@ -1,7 +1,9 @@
+import { useLang } from '../i18n'
 import { Heading, Reveal, Tag } from './ui'
 
 export default function WorkSection({ section, onOpen }) {
   const { id, num, kicker, title, text, callout, items } = section
+  const { t } = useLang()
 
   return (
     <section id={id} className="scroll-mt-17 border-t border-line py-20 md:py-30">
@@ -27,7 +29,7 @@ export default function WorkSection({ section, onOpen }) {
             <Reveal key={item.src} delay={i * 0.08} className={`col-span-12 ${item.span}`}>
               <button
                 onClick={() => onOpen(item.src)}
-                aria-label={`Ampliar imagem: ${item.label}`}
+                aria-label={`${t.ui.enlarge}: ${item.label}`}
                 className={`group relative block w-full cursor-zoom-in overflow-hidden rounded-[14px] border border-line bg-bg-2 ${item.aspect}`}
               >
                 <img

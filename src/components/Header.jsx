@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { links, nav } from '../data'
+import { links, navIds } from '../data'
+import { useLang } from '../i18n'
 import useActiveSection from '../hooks/useActiveSection'
 import { BehanceIcon, IconLink, InstagramIcon, MenuIcon } from './Icons'
-
-const ids = nav.map((n) => n.id)
+import LanguageSwitch from './LanguageSwitch'
 
 function Socials() {
   return (
@@ -17,7 +17,8 @@ function Socials() {
 
 export default function Header() {
   const [open, setOpen] = useState(false)
-  const active = useActiveSection(ids)
+  const active = useActiveSection(navIds)
+  const { t } = useLang()
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/55 backdrop-blur-md">
@@ -28,14 +29,14 @@ export default function Header() {
 
         <nav className="hidden md:block">
           <ul className="flex gap-7">
-            {nav.map((n) => (
-              <li key={n.id}>
+            {navIds.map((id) => (
+              <li key={id}>
                 <a
-                  href={`#${n.id}`}
-                  className={`relative text-sm font-medium transition-colors hover:text-fg ${active === n.id ? 'text-fg' : 'text-muted'}`}
+                  href={`#${id}`}
+                  className={`relative text-sm font-medium transition-colors hover:text-fg ${active === id ? 'text-fg' : 'text-muted'}`}
                 >
-                  {n.label}
-                  {active === n.id && (
+                  {t.nav[id]}
+                  {active === id && (
                     <motion.span layoutId="nav-underline" className="absolute inset-x-0 -bottom-1.5 h-0.5 bg-accent" />
                   )}
                 </a>
@@ -44,13 +45,18 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="hidden gap-2.5 md:flex">
+        <div className="hidden items-center gap-2.5 md:flex">
+          <LanguageSwitch id="desktop" />
           <Socials />
         </div>
 
-        <button className="md:hidden" aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>
-          <MenuIcon open={open} />
-        </button>
+        {/* no celular o botão de idioma fica sempre à vista, ao lado do menu */}
+        <div className="flex items-center gap-3 md:hidden">
+          <LanguageSwitch id="mobile" />
+          <button aria-label={t.ui.menu} aria-expanded={open} onClick={() => setOpen(!open)}>
+            <MenuIcon open={open} />
+          </button>
+        </div>
       </div>
 
       {/* menu do celular */}
@@ -63,10 +69,10 @@ export default function Header() {
             className="overflow-hidden border-t border-line bg-bg md:hidden"
           >
             <ul className="wrap py-2">
-              {nav.map((n) => (
-                <li key={n.id}>
-                  <a href={`#${n.id}`} onClick={() => setOpen(false)} className="block py-3 text-lg">
-                    {n.label}
+              {navIds.map((id) => (
+                <li key={id}>
+                  <a href={`#${id}`} onClick={() => setOpen(false)} className="block py-3 text-lg">
+                    {t.nav[id]}
                   </a>
                 </li>
               ))}
